@@ -44,7 +44,23 @@ namespace Packages.MapToolbox
             ramp,
             others
         }
+        public enum OneWay
+        {
+            road,
+            road_shoulder,
+            crosswalk,
+            unknown,
+            freeway,
+            expressway,
+            national_road,
+            provincial_road,
+            city_road,
+            rual_road,
+            ramp,
+            others
+        }
         public SubType subType;
+        public OneWay oneWay;
         static Material Material { get; set; }
         Lanelet2Map Lanelet2Map => GetComponentInParent<Lanelet2Map>();
         private void Start()

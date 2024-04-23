@@ -75,6 +75,12 @@ namespace Packages.MapToolbox
                             gameObject.GetComponent<Lanelet>().subType = subType1;
                         }
                         break;
+                    case "one_way":
+                        if (Enum.TryParse<Lanelet.OneWay>(tag.Attributes["v"].Value, out var oneWay))
+                        {
+                            gameObject.GetComponent<Lanelet>().oneWay = oneWay;
+                        }
+                        break;
                     case "turn_direction":
                         var lanelet = gameObject.GetComponent<Lanelet>();
                         if (lanelet)
@@ -152,8 +158,9 @@ namespace Packages.MapToolbox
                 {
                     relation.AppendChild(doc.AddTag("type", "lanelet"));
                     relation.AppendChild(doc.AddTag("subtype", lanelet.subType.ToString()));
+                    relation.AppendChild(doc.AddTag("one_way", lanelet.oneWay.ToString()));
                     relation.AppendChild(doc.AddTag("turn_direction", lanelet.turnDirection.ToString()));
-                    relation.AppendChild(doc.AddTag("speed_limit", string.Format("{0}km/h", lanelet.speed_limit)));
+                    relation.AppendChild(doc.AddTag("speed_limit", string.Format("{0}", lanelet.speed_limit)));
                     relation.AppendChild(doc.AddMember("way", lanelet.left.name, "left"));
                     relation.AppendChild(doc.AddMember("way", lanelet.right.name, "right"));
                     foreach (var item in members)
